@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeCarz</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="./img/logo2.png">
+
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+  <script>
+    var cont = 0;
+    function loopSlider() {
+      var xx = setInterval(function () {
+        switch (cont) {
+          case 0: {
+            $("#slider-1").fadeOut(400);
+            $("#slider-2").delay(400).fadeIn(400);
+            $("#sButton1").removeClass("bg-purple-800");
+            $("#sButton2").addClass("bg-purple-800");
+            cont = 1;
+
+            break;
+          }
+          case 1:
+            {
+
+              $("#slider-2").fadeOut(400);
+              $("#slider-1").delay(400).fadeIn(400);
+              $("#sButton2").removeClass("bg-purple-800");
+              $("#sButton1").addClass("bg-purple-800");
+
+              cont = 0;
+
+              break;
+            }
+
+
+        }
+      }, 8000);
+
+    }
+
+    function reinitLoop(time) {
+      clearInterval(xx);
+      setTimeout(loopSlider(), time);
+    }
+
+
+
+    function sliderButton1() {
+
+      $("#slider-2").fadeOut(400);
+      $("#slider-1").delay(400).fadeIn(400);
+      $("#sButton2").removeClass("bg-purple-800");
+      $("#sButton1").addClass("bg-purple-800");
+      reinitLoop(4000);
+      cont = 0
+
+    }
+
+    function sliderButton2() {
+      $("#slider-1").fadeOut(400);
+      $("#slider-2").delay(400).fadeIn(400);
+      $("#sButton1").removeClass("bg-purple-800");
+      $("#sButton2").addClass("bg-purple-800");
+      reinitLoop(4000);
+      cont = 1
+
+    }
+
+    $(window).ready(function () {
+      $("#slider-2").hide();
+      $("#sButton1").addClass("bg-purple-800");
+
+
+      loopSlider();
+
+
+
+
+
+
+    });
+
+
+  </script>
+
+</head>
+
+<body>
+  <!-------nav bar start------->
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <div class="w-full text-gray-700 bg-black dark-mode:text-gray-200 dark-mode:bg-gray-800">
+    <div x-data="{ open: false }"
+      class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+      <div class="p-4 flex flex-row items-center justify-between">
+        <img class="logo" src="./img/logo2.png" height="100" width="100">
+        <button class=" md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
+        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+          <path x-show="!open" fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+          <path x-show="open" fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"></path>
+        </svg>
+        </button>
+      </div>
+      <nav :class="{'flex': open, 'hidden': !open}"
+        class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
+        <a class="px-4 py-2 mt-2 text-sm font-semibold text-white-900 bg-gray-200 rounded-lg dark-mode:bg-gray-700 dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="./index.html">Home</a>
+
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-200 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="./About.html">About</a>
+        <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+          href="./contact.html">Contact</a>
+        <div @click.away="open = false" class="relative" x-data="{ open: false }">
+          <button @click="open = !open"
+            class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+            <span>Companies</span>
+            <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
+              class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+              <path fill-rule="evenodd"
+                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <div x-show="open" x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="transform opacity-0 scale-95"
+            x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75"
+            x-transition:leave-start="transform opacity-100 scale-100"
+            x-transition:leave-end="transform opacity-0 scale-95"
+            class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
+            <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="./toyota.html">Toyota</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="./KIA.html">KIA</a>
+              <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                href="./suzuki.html">Suzuki</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-------nav bar ends------->
+
+  <!-- hero section start -->
+  <div class="relative bg-white overflow-hidden" style="z-index: -1;">
+    <div class="max-w-7xl mx-auto">
+      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
+          fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="50,0 100,0 50,100 0,100" />
+        </svg>
+
+        <div>
+          <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
+            <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
+              <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
+                <div class="flex items-center justify-between w-full md:w-auto">
+
+                  <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button"
+                      class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                      aria-expanded="false">
+                      <span class="sr-only">Open main menu</span>
+
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <div class="absolute z-10 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+            <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+              <div class="px-5 pt-4 flex items-center justify-between">
+
+                <div class="-mr-2">
+                  <button type="button"
+                    class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span class="sr-only">Close main menu</span>
+                    <!-- Heroicon name: outline/x -->
+
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div class="sm:text-center lg:text-left">
+            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+              <span class="block xl:inline">Safe Carz</span>
+              <span class="block text-indigo-600 xl:inline">save up to 10% online</span>
+            </h1>
+            <p
+              class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              Serving best insurance policies through different Insurance companies
+            </p>
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div class="rounded-md shadow">
+                <a href="#"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10">
+                  Get started
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="./img/background.jpg" alt="">
+    </div>
+  </div>
+
+  <!-- hero section end -->
+
+  <!-- cards start -->
+
+  <section class="text-gray-600 body-font">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap w-full mb-20">
+        <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">We Know What You Want
+          </h1>
+          <div class="h-1 w-20 bg-indigo-500 rounded"></div>
+        </div>
+        <p class="lg:w-1/2 w-full leading-relaxed text-gray-500">We protect from financial loss. We are the form of risk
+          management, we primarily used to hedge against the risk of a contingent or uncertain loss. We are an entity
+          who provides insurance, an insurance company, an insurance carrier or an underwriter.</p>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="./img/car-insurance1.jpg"
+              alt="content">
+            <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Comprehensive Insurance</h2>
+            <p class="leading-relaxed text-base">Covers against damage to your car, other vehicles and property. Choose
+              to add on a number of optional ‘peace of mind’ extras.</p>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="./img/car-insur2.jpg" alt="content">
+            <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Pay as You Drive Insurance</h2>
+            <p class="leading-relaxed text-base">Enjoy all the benefits of Comprehensive cover at an even more
+              affordable price, by only paying for the kilometres you plan to drive.</p>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="./img/third-party.jpg" alt="content">
+            <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Third Party Insurance</h2>
+            <p class="leading-relaxed text-base">Insures your vehicle against the cost of damage to other vehicles and
+              property.</p>
+          </div>
+        </div>
+        <div class="xl:w-1/4 md:w-1/2 p-4">
+          <div class="bg-gray-100 p-6 rounded-lg">
+            <img class="h-40 rounded w-full object-cover object-center mb-6" src="./img/thirsd.jpg" alt="content">
+            <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">SUBTITLE</h3>
+            <h2 class="text-lg text-gray-900 font-medium title-font mb-4">Third Party Property, Fire & Theft</h2>
+            <p class="leading-relaxed text-base">Includes the same coverage as Third Party Insurance with the added
+              benefit of protection from theft and fire.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- cards end -->
+
+  <!----slider start---->
+  <h6 style="text-align: center;">Advertisement</h6>
+  <div class="sliderAx h-auto">
+    <div id="slider-1" class="container mx-auto">
+      <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill"
+        style="background-image: url(./img/Copy\ of\ Car\ Insurance\ Service\ Template\ -\ Made\ with\ PosterMyWall.jpg)">
+        <div class="md:w-1/2">
+          <p class="font-bold text-sm uppercase">Safe carz</p>
+          <p class="text-3xl font-bold">Services</p>
+          <p class="text-2xl mb-10 leading-none">Our Exclusive Deal</p>
+          <a href="#"
+            class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact
+            us</a>
+        </div>
+      </div>
+      <br>
+    </div>
+
+    <div id="slider-2" class="container mx-auto">
+      <div class="bg-cover bg-top  h-auto text-white py-24 px-10 object-fill"
+        style="background-image: url(./img/banner3.jpg)">
+
+        <p class="font-bold text-sm uppercase">Services</p>
+        <p class="text-3xl font-bold">Hello world</p>
+        <p class="text-2xl mb-10 leading-none">Carousel with TailwindCSS and jQuery</p>
+        <a href="./contact.html"
+          class="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact
+          us</a>
+
+      </div>
+      <br>
+    </div>
+  </div>
+  <div class="flex justify-between w-12 mx-auto pb-2">
+    <button id="sButton1" onclick="sliderButton1()" class="bg-purple-400 rounded-full w-4 pb-2 "></button>
+    <button id="sButton2" onclick="sliderButton2() " class="bg-purple-400 rounded-full w-4 p-2"></button>
+  </div>
+  <!----slider ends---->
+
+  <!----second card start---->
+  <br><br>
+  <section class="text-gray-400 body-font bg-gray-900">
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap w-full mb-20 flex-col items-center text-center">
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-white">The SafeCarz Insurance Difference</h1>
+        <p class="lg:w-1/2 w-full leading-relaxed text-opacity-80"></p>
+      </div>
+      <div class="flex flex-wrap -m-4">
+        <div class="xl:w-1/3 md:w-1/2 p-4">
+          <div class="border border-gray-700 border-opacity-75 p-6 rounded-lg">
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-indigo-400 mb-4">
+
+              <img src="./img/icons8-percentage-24.png ">
+              </svg>
+            </div>
+            <h2 class="text-lg text-white font-medium title-font mb-2">Exclusive online discounts</h2>
+            <p class="leading-relaxed text-base">Insurance made simple! Save up to 10% when you buy online.1 Get a quote
+              now.</p>
+          </div>
+        </div>
+        <div class="xl:w-1/3 md:w-1/2 p-4">
+          <div class="border border-gray-700 border-opacity-75 p-6 rounded-lg">
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-indigo-400 mb-4">
+
+              <img src="./img/icons8-credit-card-24.png">
+              </svg>
+            </div>
+            <h2 class="text-lg text-white font-medium title-font mb-2">Earn $50 Safecarz.com Credit</h2>
+            <p class="leading-relaxed text-base">Score Safecarz.com Credit with Comprehensive and Pay As You Drive
+              policies, to spend at Pakistan’s #1 online retailer!+ Click for details.</p>
+          </div>
+        </div>
+        <div class="xl:w-1/3 md:w-1/2 p-4">
+          <div class="border border-gray-700 border-opacity-75 p-6 rounded-lg">
+            <div
+              class="w-10 h-10 inline-flex items-center justify-center rounded-full bg-gray-800 text-indigo-400 mb-4">
+
+              <img src="./img/clock.gif">
+
+              </svg>
+            </div>
+            <h2 class="text-lg text-white font-medium title-font mb-2">Super Friendly Claims Process</h2>
+            <p class="leading-relaxed text-base">Your claim, your way! Claim online 24/7, or call us to speak to our
+              friendly team. Find out more.</p>
+          </div>
+        </div>
+        
+        <!----second card end---->
+         
+        <section class="text-gray-600 body-font">
+          <div class="container px-5 py-24 mx-auto">
+            <h1 class="text-3xl font-medium title-font text-white-900 mb-12 text-center">Here’s what Safecarz customers say</h1>
+            <div class="flex flex-wrap -m-4">
+              <div class="p-4 md:w-1/2 w-full">
+                <div class="h-full bg-gray-100 p-8 rounded">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4"
+                    viewBox="0 0 975.036 975.036">
+                    <path
+                      d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z">
+                    </path>
+                  </svg>
+                  <p class="leading-relaxed mb-6">“I was unsure about a couple of issues and called the contact line. The representative listened and was very helpful. Based on the representative’s helpfulness I purchased the Insurance.”</p>
+                  <a class="inline-flex items-center">
+                    <img alt="testimonial" src="./img/woman.jpg"
+                      class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                    <span class="flex-grow flex flex-col pl-4">
+                      <span class="title-font font-medium text-gray-900">Monica</span>
+                      <span class="text-gray-500 text-sm">VIC2</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="p-4 md:w-1/2 w-full">
+                <div class="h-full bg-gray-100 p-8 rounded">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="block w-5 h-5 text-gray-400 mb-4"
+                    viewBox="0 0 975.036 975.036">
+                    <path
+                      d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z">
+                    </path>
+                  </svg>
+                  <p class="leading-relaxed mb-6">“As a stay home retiree who does not drive as much as most people, having the opportunity to choose the option “pay-as-you-drive” has possibly saved me $300 annually for car insurance.”</p>
+                  <a class="inline-flex items-center">
+                    <img alt="testimonial" src="./img/man.jpeg"
+                      class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+                    <span class="flex-grow flex flex-col pl-4">
+                      <span class="title-font font-medium text-gray-900">Mark</span>
+                      <span class="text-gray-500 text-sm">QLD2</span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+                                                  <!-------footer start------->
+        <div class="myDiv">
+        <footer class="text-gray-600 body-font">
+          <div class="container px-5 py-18 mx-auto flex items-center sm:flex-row flex-col">
+            <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                <img class="logo" src="./img/logo2.png" height="100" width="100">
+             
+             
+            </a>
+            <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">SafeCarz —
+              <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@SafeCarz.com</a>
+            </p>
+            <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+              <a class="text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-500">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                </svg>
+              </a>
+              <a class="ml-3 text-gray-500">
+                <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                  <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                  <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                </svg>
+              </a>
+            </span>
+          </div>
+        </div>
+        </footer>
+                                                      <!-------footer end------->
+</body>
+
+</html>
